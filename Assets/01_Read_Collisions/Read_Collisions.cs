@@ -41,7 +41,7 @@ public class Read_Collisions : MonoBehaviour
         if (m_Readback.done)
         {
             m_Readback = AsyncGPUReadback.Request(m_Buffer, OnReadback);
-            m_Buffer.SetData(new[] { 0 }); //This isn't perfect, we can miss event this way
+            m_Buffer.SetData(new[] { 0 });
         }
     }
 
