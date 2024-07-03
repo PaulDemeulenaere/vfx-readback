@@ -26,7 +26,7 @@ public class Read_All_Positions : MonoBehaviour
         m_ReadbackBuffer.CopyFrom(asyncGpuReadbackRequest.GetData<Vector3>());
     }
 
-    private static readonly float kUpdateRate = 0.0f; //Can be greater than 0.0 to avoid reading back every frames
+    private static readonly float kUpdateRate = 0.1f; //In seconds, this value can be equals to 0 to relaunch readback as fast as we can.
     private float m_Wait = kUpdateRate;
 
     private static readonly float kDebugSize = 0.05f;
