@@ -53,6 +53,7 @@ public class Read_All_Positions : MonoBehaviour
 
     void OnDisable()
     {
+        m_Readback.WaitForCompletion(); //prevent error after disposing m_ReadbackBuffer
         m_Buffer.Release();
         m_ReadbackBuffer.Dispose();
     }
