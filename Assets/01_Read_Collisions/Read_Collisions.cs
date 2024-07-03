@@ -11,9 +11,12 @@ public class Read_Collisions : MonoBehaviour
     private GraphicsBuffer m_Buffer;
     private AsyncGPUReadbackRequest m_Readback;
 
+    const int kMaxEventCount = 16;
+
     void OnEnable()
     {
-        m_Buffer = new GraphicsBuffer(GraphicsBuffer.Target.Raw, GraphicsBuffer.UsageFlags.None, 16 * 6 + 1 , Marshal.SizeOf(typeof(uint)));
+        var count = kMaxEventCount * 6 + 1; //Storing an uint counter at the beginning of the buffer
+        m_Buffer = new GraphicsBuffer(GraphicsBuffer.Target.Raw, GraphicsBuffer.UsageFlags.None, kMaxEventCount * 6 + 1, Marshal.SizeOf(typeof(uint)));
         m_Buffer.SetData(new[] { 0 });
 
         GetComponent<VisualEffect>().SetGraphicsBuffer(kReadback_CollisionID, m_Buffer);

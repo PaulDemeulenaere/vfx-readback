@@ -13,12 +13,14 @@ public class Read_All_Positions : MonoBehaviour
     private AsyncGPUReadbackRequest m_Readback;
     private NativeArray<Vector3> m_ReadbackBuffer;
 
+    const int kMaxParticles = 64;
+
     void OnEnable()
     {
-        m_Buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, GraphicsBuffer.UsageFlags.None, 64, Marshal.SizeOf(typeof(Vector3)));
+        m_Buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, GraphicsBuffer.UsageFlags.None, kMaxParticles, Marshal.SizeOf(typeof(Vector3)));
         GetComponent<VisualEffect>().SetGraphicsBuffer(kReadback_All_PositionsID, m_Buffer);
 
-        m_ReadbackBuffer = new NativeArray<Vector3>(64, Allocator.Persistent, NativeArrayOptions.ClearMemory);
+        m_ReadbackBuffer = new NativeArray<Vector3>(64, Allocator.Persistent);
     }
 
     void OnReadback(AsyncGPUReadbackRequest asyncGpuReadbackRequest)
